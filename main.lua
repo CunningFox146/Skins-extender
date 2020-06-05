@@ -3,7 +3,8 @@ local AddClassPostConstruct = AddClassPostConstruct
 local MODROOT = MODROOT
 local modinfo = modinfo
 local modoptions = {
-	format = GetModConfigData("skinext_date_format")
+	format = GetModConfigData("skinext_date_format"),
+	log_menugift = GetModConfigData("skinext_log_menugift")
 }
 
 GLOBAL.setfenv(1, GLOBAL)
@@ -124,7 +125,9 @@ AddClassPostConstruct("screens/thankyoupopup", function(self)
 		local skin = self.items[self.current_item]
 		if skin and skin.item_id ~= 0 then
 			printwrap("skin", skin)
-			SkinSaver:AddSkin(skin.item, skin.item_id)
+			if modoptions.log_menugift then
+				SkinSaver:AddSkin(skin.item, skin.item_id)
+			end
 		end
 		return _OpenGift(self, ...)
 	end

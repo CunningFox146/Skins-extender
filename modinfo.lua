@@ -1,6 +1,6 @@
 name = "Skins extender"
 author = "Cunning fox"
-version = "1.2.1"
+version = "1.2.2"
 description = "Automatically opens your skis without science machine and creates a statistic for every skin that you revive!\nVersion: "..version
 forumthread = ""
 
@@ -19,6 +19,12 @@ local function BuildFormatOption(desc, data)
   return { description = desc, data = data, hover = data } -- os.date(data, example_time) }
 end
 
+local function BuildBoolOptions()
+  return {
+    { description = "Yes", data = true },
+    { description = "No", data = false }
+  }
+
 configuration_options = {
   {
     label = "Date/Time Format",
@@ -27,9 +33,15 @@ configuration_options = {
       BuildFormatOption("System default", "%c"),
       BuildFormatOption("Classic", "%x %X"),
       BuildFormatOption("Short 24H", "%a %H:%M"),
-      BuildFormatOption("Short 12H", "%a %I:%M %p")
+      BuildFormatOption("Short 12H", "%a %I:%M%p")
     },
     default = "%c"
     -- hover =
+  },
+  {
+    label = "Log menu screen gifts",
+    name = "skinext_log_menugift",
+    options = BuildBoolOptions(""),
+    default = true
   }
 }
