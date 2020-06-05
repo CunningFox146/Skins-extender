@@ -1,6 +1,6 @@
 name = "Skins extender"
 author = "Cunning fox"
-version = "1.2.0"
+version = "1.2.1"
 description = "Automatically opens your skis without science machine and creates a statistic for every skin that you revive!\nVersion: "..version
 forumthread = ""
 
@@ -13,3 +13,23 @@ icon = "preview.tex"
 api_version = 10
 
 priority = -0.681239
+
+-- local example_time = os.time()
+local function BuildFormatOption(desc, data)
+  return { description = desc, data = data, hover = data } -- os.date(data, example_time) }
+end
+
+configuration_options = {
+  {
+    label = "Date/Time Format",
+    name = "skinext_date_format",
+    options = {
+      BuildFormatOption("System default", "%c"),
+      BuildFormatOption("Classic", "%x %X"),
+      BuildFormatOption("Short 24H", "%a %H:%M"),
+      BuildFormatOption("Short 12H", "%a %I:%M %p")
+    },
+    default = "%c"
+    -- hover =
+  }
+}

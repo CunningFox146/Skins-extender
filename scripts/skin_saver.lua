@@ -20,7 +20,7 @@ function SkinSaver:LoadData()
 end
 
 function SkinSaver:AddSkin(name, id)
-	table.insert(self.loaded_data, {name = name, id = id, time = os.date("%c", os.time())})
+	table.insert(self.loaded_data, {name = name, id = id, time_int = os.time()})
 	self:Save()
 end
 
