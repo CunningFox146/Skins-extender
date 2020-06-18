@@ -1,4 +1,4 @@
-name = " Skins extender"
+name = "Skins extender"
 author = "Cunning fox"
 version = "1.2.0"
 description = "Automatically opens your skis without science machine and creates a statistic for every skin that you revive!\nVersion: "..version
