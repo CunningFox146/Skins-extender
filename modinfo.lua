@@ -24,6 +24,7 @@ local function BuildBoolOptions()
     { description = "Yes", data = true },
     { description = "No", data = false }
   }
+end
 
 configuration_options = {
   {
