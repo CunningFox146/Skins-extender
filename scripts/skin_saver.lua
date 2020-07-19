@@ -1,5 +1,16 @@
 local PopupDialogScreen = require "screens/redux/popupdialog"
 local str = mods.open_skins.strings
+local function droptype(item)
+	if item.gifttype ~= nil then
+		return item.gifttype
+	elseif item.modified_time ~= nil and item.modified_time ~= 0 then
+		return "GAMEPLAY"
+	elseif item.modified_time ~= nil then
+		return "LOGIN"
+	else
+		return ("UNKNOWN, PLEASE REPORT\n" + printwrap("(Skinext) unrecognized type; Item:", item))
+	end
+end
 
 SkinSaver = {
 	ver = 1.0,
@@ -19,8 +30,8 @@ function SkinSaver:LoadData()
     end
 end
 
-function SkinSaver:AddSkin(name, id)
-	table.insert(self.loaded_data, {name = name, id = id, time_int = os.time()})
+function SkinSaver:AddSkin(item)
+	table.insert(self.loaded_data, {name = item.item_type, id = item.item_id, type = droptype(item), time_int = os.time()})
 	self:Save()
 end
 

@@ -124,11 +124,13 @@ AddClassPostConstruct("screens/thankyoupopup", function(self)
 	function self:OpenGift(...)
 		local skin = self.items[self.current_item]
 		if skin and skin.item_id ~= 0 then
-			printwrap("skin", skin)
+			printwrap("(SkinExt) skin:", skin)
 			if modoptions.log_menugift then
-				SkinSaver:AddSkin(skin.item, skin.item_id)
+				SkinSaver:AddSkin(skin)
 			end
 		end
+		-- retval = _OpenGift(self, ...)
+		-- printwrap("rv_OG",retval)
 		return _OpenGift(self, ...)
 	end
 end)
