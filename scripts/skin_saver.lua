@@ -31,11 +31,11 @@ function SkinSaver:Save()
 		f:close()
 	else
 		print("[Skins]: Failed to write "..self.file)
-		TheFrontEnd:PushScreen(PopupDialogScreen(str.write_fail_title, str.write_fail_body,
-			{
-				{text=STRINGS.UI.SERVERLISTINGSCREEN.OK, cb = function() TheFrontEnd:PopScreen() end},
-			}
-		))
+		-- TheFrontEnd:PushScreen(PopupDialogScreen(str.write_fail_title, str.write_fail_body,
+		-- 	{
+		-- 		{text=STRINGS.UI.SERVERLISTINGSCREEN.OK, cb = function() TheFrontEnd:PopScreen() end},
+		-- 	}
+		-- ))
 	end
 end
 

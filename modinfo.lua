@@ -1,6 +1,6 @@
 name = "Skins extender"
 author = "Cunning fox, Myxal"
-version = "1.3"
+version = "1.3.1"
 description = "Automatically opens your skis without science machine and creates a statistic for every skin that you revive!\nVersion: "..version
 forumthread = ""
 
