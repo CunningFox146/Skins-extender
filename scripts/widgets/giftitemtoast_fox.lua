@@ -4,10 +4,9 @@ local Image = require "widgets/image"
 local Widget = require "widgets/widget"
 local UIAnim = require "widgets/uianim"
 
-local GiftItemToast = Class(Widget, function(self, owner)
+local GiftItemToast = Class(Widget, function(self)
     Widget._ctor(self, "Fox")
 
-    self.owner = owner
     self.root = self:AddChild(Widget("ROOT"))
 	self.root:SetScale(.4)
 	self.root:SetPosition(0, 500)
@@ -15,6 +14,7 @@ local GiftItemToast = Class(Widget, function(self, owner)
     self.anim = self.root:AddChild(UIAnim())
     self.anim:GetAnimState():SetBuild("skingift_popup")
     self.anim:GetAnimState():SetBank("gift_popup")
+	self.anim:GetAnimState():AnimateWhilePaused(true)
 	
 	self.title = self.root:AddChild(Text(UIFONT, 45))
     self.title:SetPosition(0, 172)
@@ -27,12 +27,7 @@ local GiftItemToast = Class(Widget, function(self, owner)
     self.name_text:SetHAlign(ANCHOR_MIDDLE)
     self.name_text:SetPosition(0, -10, 0)
 	
-	self.inst:ListenForEvent("gift_recieved", function()
-		local item = TheInventory:GetUnopenedItems()[1]
-		if item ~= nil and not self.opening then
-			self:ShowSkin(item.item_type, item.item_id)
-		end
-	end, TheGlobalInstance)
+	self:StartUpdating()
 end)
 
 function GiftItemToast:ShowSkin(item, id)
@@ -48,11 +43,10 @@ function GiftItemToast:ShowSkin(item, id)
     self.anim:GetAnimState():PlayAnimation("open")
 	self.anim:GetAnimState():SetTime(.65 * self.anim:GetAnimState():GetCurrentAnimationLength())
     self.anim:GetAnimState():PushAnimation("skin_loop")
-    self.anim:GetAnimState():PushAnimation("skin_out")
+    self.anim:GetAnimState():PushAnimation("skin_out", false)
 	
 	if id then
 		TheInventory:SetItemOpened(id)
-		SkinSaver:AddSkin(item, id)
 	end
 	
 	local function AnimDone()
@@ -67,6 +61,13 @@ function GiftItemToast:ShowSkin(item, id)
 	end
 	
 	self.anim.inst:ListenForEvent("animover", AnimDone)
+end
+
+function GiftItemToast:OnUpdate(dt)
+	local item = TheInventory:GetUnopenedItems()[1]
+	if item and not self.opening then
+		self:ShowSkin(item.item_type, item.item_id)
+	end
 end
 
 local p = function(...) return false end
