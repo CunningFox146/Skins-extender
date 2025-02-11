@@ -1,3 +1,4 @@
+local SkinsUtils = require(CHEATS_ENABLED and "utils/skinutils_debug" or "utils/skinutils")
 local Button = require "widgets/button"
 local Text = require "widgets/text"
 local Image = require "widgets/image"
@@ -45,10 +46,6 @@ function GiftItemToast:ShowSkin(item, id)
     self.anim:GetAnimState():PushAnimation("skin_loop")
     self.anim:GetAnimState():PushAnimation("skin_out", false)
 	
-	if id then
-		TheInventory:SetItemOpened(id)
-	end
-	
 	local function AnimDone()
 		if not self.anim:GetAnimState():AnimDone() then
 			return
@@ -58,13 +55,18 @@ function GiftItemToast:ShowSkin(item, id)
 		
 		self.root:CancelMoveTo()
 		self.root:MoveTo(self.root:GetPosition(), Vector3(0, 500, 0), .5)
+
+		if id then
+			SkinsUtils.SetItemOpened(id)
+		end
+		self.anim.inst:RemoveEventCallback("animover", AnimDone)
 	end
 	
 	self.anim.inst:ListenForEvent("animover", AnimDone)
 end
 
 function GiftItemToast:OnUpdate(dt)
-	local item = TheInventory:GetUnopenedItems()[1]
+	local item = SkinsUtils.GetSkins()[1]
 	if item and not self.opening then
 		self:ShowSkin(item.item_type, item.item_id)
 	end
