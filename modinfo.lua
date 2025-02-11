@@ -1,6 +1,6 @@
 name = "Skins extender"
 author = "CunningFox146"
-version = "1.4.0"
+version = "2.0.0"
 description = "Automatically opens your skins without science machine with a neat popup!\nVersion: "..version
 forumthread = ""
 
@@ -12,4 +12,4 @@ icon = "preview.tex"
 
 api_version = 10
 
-priority = -0.681239
+priority = 1.80085
