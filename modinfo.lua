@@ -1,7 +1,7 @@
 name = "Skins extender"
 author = "CunningFox146"
 version = "2.0.0"
-description = "Automatically opens your skins without science machine with a neat popup!\nVersion: "..version
+description = "Automatically opens your skins without science machine with a neat popup!\nVersion: " .. version
 forumthread = ""
 
 client_only_mod = true
